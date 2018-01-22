@@ -36,7 +36,7 @@ db = getattr(client, dbname)
 db_resp = "Begin_Value"
 while db_resp is not None:
     # Get a CRS sha 256 file with no ipfs hash
-    db_resp = db.reports.find_one({"parsed_metadata.serve": "1", "ipfs": {'$exists': False}}, {"sha256":1, "_id":1})
+    db_resp = db.reports.find_one({"parsed_metadata.serve": "1", "ipfs_hash": {'$exists': False}}, {"sha256":1, "_id":1})
 
     print(db_resp['sha256'])
 
@@ -49,7 +49,7 @@ while db_resp is not None:
 
     db.reports.update(key, {"$set": update_details}, upsert=True)
     print(db_resp['_id'])
-
+    
     #data_base = getCollection(dbname)
     #url_sourcesObject = getattr(data_base, collection)
     #db.reports.find({"parsed_metadata.serve": "1"},{"sha256":1, "_id":0}).count()
